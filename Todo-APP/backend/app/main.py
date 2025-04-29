@@ -4,8 +4,14 @@ from app.controller.crud import get_todos, create_todo, get_todo_by_id, update_t
 from app.controller.crud import get_db
 from sqlalchemy.orm import Session
 from typing import List
+from app.authentication.auth import get_current_user
+from app.database import db_model
+
+from app.authentication.auth_routes import router as auth_router
+
 
 app = FastAPI()
+app.include_router(auth_router)
 
 @app.get("/")
 def read_root():
@@ -16,7 +22,8 @@ def get_all_todos(db: Session = Depends(get_db)):
     return get_todos(db)
 
 @app.post("/todos", response_model=TodoCreate)
-def create_new_todo(todo: TodoCreate, db: Session = Depends(get_db)):
+def create_new_todo(todo: TodoCreate, db: Session = Depends(get_db), current_user: db_model.User = Depends(get_current_user)):
+
     return create_todo(todo, db)
 
 @app.get("/todos/{todo_id}", response_model=TodoCreate)
