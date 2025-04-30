@@ -8,10 +8,11 @@ from app.authentication.auth import get_current_user
 from app.database import db_model
 
 from app.authentication.auth_routes import router as auth_router
-
+from app.gpt_model.gpt_route import router as gpt_router
 
 app = FastAPI()
 app.include_router(auth_router)
+app.include_router(gpt_router)
 
 @app.get("/")
 def read_root():

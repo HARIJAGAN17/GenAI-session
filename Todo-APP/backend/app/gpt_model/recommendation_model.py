@@ -1,23 +1,20 @@
 from langchain_openai import AzureChatOpenAI
-from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
 
 load_dotenv()
 
 llm = AzureChatOpenAI(
-    azure_deployment="gpt4o",  # or your deployment
-    api_version="2024-02-15-preview",  # or your api version
-   
+    azure_deployment="gpt4o",
+    api_version="2024-10-21",
 )
 
-user_Input = input("You: ")
-
-prompt = ChatPromptTemplate(
-    [
-        ("system",("Hey please assist the user with this query.")),
-        ("human",user_Input),
-    ]
-)
-
-response = llm.invoke(prompt.format(user_input=user_Input))
-print(response.content)
+def get_gpt_response(user_input: str) -> str:
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", "Hey please assist the user with this query."),
+        ("human", "{user_input}"),
+    ])
+    
+    formatted_prompt = prompt.format(user_input=user_input)
+    response = llm.invoke(formatted_prompt)
+    return response.content
