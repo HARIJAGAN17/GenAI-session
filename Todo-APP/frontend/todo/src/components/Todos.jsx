@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "./api";
+import './Todo_generate.css'
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -8,23 +9,24 @@ const TodoList = () => {
     try {
       const response = await api.get('/recommendation');
       setTodos(response.data.response);
-      console.log(todos);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
-      <h2>Todo List</h2>
-      <button onClick={fetchTodos}>Generate Todos</button>
-      <ul style={{ listStyleType: "none", padding: 0 }}>
+    <div className="todo-container">
+      <h1 className="todo-title">✨ Daily Todo Recommendations</h1>
+      <button className="generate-button" onClick={fetchTodos}>Generate Todos</button>
+
+      <div className="todo-grid">
         {todos.map((todo, index) => (
-          <li key={index} style={{ margin: "10px 0", background: "#f4f4f4", padding: "10px", borderRadius: "5px" }}>
-            {todo.trim()}
-          </li>
+          <div key={index} className="todo-card">
+            <strong>Task {index + 1}</strong>
+            <p>{todo.trim()}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
