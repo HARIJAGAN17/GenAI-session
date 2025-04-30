@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from app.authentication.auth import get_current_user
 from app.database import db_model
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.authentication.auth_routes import router as auth_router
 from app.gpt_model.gpt_route import router as gpt_router
@@ -13,6 +14,15 @@ from app.gpt_model.gpt_route import router as gpt_router
 app = FastAPI()
 app.include_router(auth_router)
 app.include_router(gpt_router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 def read_root():
