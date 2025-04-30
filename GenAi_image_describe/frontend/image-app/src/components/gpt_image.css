@@ -1,0 +1,38 @@
+.gpt-image-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .gpt-image-container input {
+    margin: 15px 0;
+  }
+  
+  .gpt-image-container button {
+    padding: 10px 20px;
+    font-weight: bold;
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .gpt-image-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .description-box {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
