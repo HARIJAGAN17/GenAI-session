@@ -7,7 +7,6 @@ from typing import List
 from app.authentication.auth import get_current_user
 from app.database import db_model
 from fastapi.middleware.cors import CORSMiddleware
-
 from app.authentication.auth_routes import router as auth_router
 from app.gpt_model.gpt_route import router as gpt_router
 
